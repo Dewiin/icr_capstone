@@ -13,7 +13,7 @@ class ImageToWordModel(OnnxInferenceModel):
     self.func = self.predict
 
 
-  def predict(self, image: np.ndarray):
+  def predict(self, image: np.ndarray, *args, **kwargs):
     image = cv2.resize(image, self.input_shapes[0][1:3][::-1])
 
     image_pred = np.expand_dims(image, axis=0).astype(np.float32)

@@ -114,7 +114,7 @@ def predict_words(words):
 def generate_stream(input):
   for word in input.split():
     yield word + ' '
-    time.sleep(0.1)
+    time.sleep(0.05)
 
 
 # main
