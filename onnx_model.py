@@ -9,6 +9,7 @@ class ImageToWordModel(OnnxInferenceModel):
   def __init__(self, char_list: typing.Union[str, list], *args, **kwargs):
     super().__init__(*args, **kwargs)
     self.char_list = char_list
+    self.func = self.predict
 
 
   def predict(self, image: np.ndarray):
