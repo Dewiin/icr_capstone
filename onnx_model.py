@@ -8,6 +8,7 @@ from mltu.utils.text_utils import ctc_decoder
 class ImageToWordModel(OnnxInferenceModel):
   def __init__(self, char_list: typing.Union[str, list], *args, **kwargs):
     super().__init__(*args, **kwargs)
+    self.instance = self
     self.char_list = char_list
     self.func = self.predict
 
