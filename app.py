@@ -125,12 +125,12 @@ def main():
   uploaded_file = st.file_uploader('', type=['png', 'webp', 'jpg', 'jpeg'])
 
   if uploaded_file:
-    col1, col2 = st.columns(2)
-    with col1:
-      st.image(uploaded_file)
+    with st.spinner('Analyzing...'):
+      col1, col2 = st.columns(2)
+      with col1:
+        st.image(uploaded_file)
 
-    with col2:
-      with st.spinner('Analyzing...'):
+      with col2:
         image = prepare_image(uploaded_file)
         lines = detect_lines(image)
         if not lines:
