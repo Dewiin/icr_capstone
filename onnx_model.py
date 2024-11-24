@@ -8,12 +8,10 @@ from mltu.utils.text_utils import ctc_decoder
 class ImageToWordModel(OnnxInferenceModel):
   def __init__(self, char_list: typing.Union[str, list], *args, **kwargs):
     super().__init__(*args, **kwargs)
-    self.instance = self
     self.char_list = char_list
-    self.func = self.predict
 
 
-  def predict(self, image: np.ndarray, *args, **kwargs):
+  def predict(self, image: np.ndarray):
     image = cv2.resize(image, self.input_shapes[0][1:3][::-1])
 
     image_pred = np.expand_dims(image, axis=0).astype(np.float32)

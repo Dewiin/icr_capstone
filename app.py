@@ -140,7 +140,7 @@ def main():
             image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
           elif image.shape[2] == 4:
             image = cv2.cvtColor(image, cv2.COLOR_RGBA2RGB)
-          result = word_prediction_model(image)
+          result = word_prediction_model.predict(image)
           st.markdown(result)
         else:
           words = detect_words(lines)
