@@ -121,6 +121,10 @@ def generate_stream(input):
 def main():
   st.markdown('<h1 style="text-align:center;">Handwriting Recognition ✍🏼</h1>', unsafe_allow_html=True)
   st.markdown('<h6 style="text-align:center; margin-bottom: 2rem;">Upload an image of handwritten text.</h6>', unsafe_allow_html=True)
+  left,center,right = st.columns(3)
+  logo = Image.open('page_images/icr_logo.webp')
+  with center:
+    st.image(logo)
 
   uploaded_file = st.file_uploader('', type=['png', 'webp', 'jpg', 'jpeg'])
 
