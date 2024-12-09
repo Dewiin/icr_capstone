@@ -28,8 +28,8 @@ gemini_model = genai.GenerativeModel('gemini-1.5-flash')
 
 # Gemini model
 def gemini_response(words):
-  prompt = f'''You will be given an input with 1 or more word with potential typos, misspellings, and bad autocorrection: {words}.
-  Return ONLY the input after fixing any potential errors. If there are no errors, just return the input without fixing anything.'''
+  prompt = f'''You will be given an input with potential typos or misspellings: {words}.
+  Return ONLY the input after fixing any potential errors. If you do not know how to change a specific word, just ignore it.'''
 
   response = gemini_model.generate_content(prompt)
   return response.text
@@ -41,9 +41,13 @@ def prepare_image(uploaded_file):
   image = np.array(image)
 
   if len(image.shape) == 2:
-    image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
-  if image.shape[2] == 4:
-    image = cv2.cvtColor(image, cv2.COLOR_RGBA2RGB)
+    image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
+  elif image.shape[2] == 3:
+    image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+    image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
+  elif image.shape[2] == 4:
+    image = cv2.cvtColor(image, cv2.COLOR_RGBA2GRAY)
+    image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
 
   h,w = image.shape[:2]
   new_size = max(h,w) + 200
